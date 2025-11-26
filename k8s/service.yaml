@@ -1,0 +1,14 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: learning-portal-frontend
+  namespace: frontend-cluster
+spec:
+  type: ClusterIP
+  selector:
+    app: learning-portal-frontend
+  ports:
+  - port: 3025
+    targetPort: 3025
+    protocol: TCP
+    name: http
