@@ -1,0 +1,416 @@
+{
+  "tenantId": "techcorp",
+  "tenantName": "TechCorp Inc.",
+  "employees": [
+    {
+      "employeeId": "EMP-001",
+      "name": "David Miller",
+      "email": "david.miller@techcorp.com",
+      "title": "CEO",
+      "department": "Executive",
+      "reportsTo": null,
+      "level": "L8",
+      "trainingCompleted": ["Security Awareness 2024", "Leadership Excellence", "Strategic Planning"],
+      "trainingInProgress": [],
+      "trainingPending": [],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-12-01",
+      "certifications": ["Executive Leadership", "MBA"],
+      "skillsGaps": [],
+      "recommendedTraining": ["AI for Executives", "Digital Transformation"]
+    },
+    {
+      "employeeId": "EMP-002",
+      "name": "Mike Johnson",
+      "email": "mike.johnson@techcorp.com",
+      "title": "VP Engineering",
+      "department": "Engineering",
+      "reportsTo": "EMP-001",
+      "level": "L7",
+      "trainingCompleted": ["Security Awareness 2024", "Engineering Leadership", "Agile Management", "System Architecture"],
+      "trainingInProgress": ["AWS Solutions Architect", "Cloud Security"],
+      "trainingPending": ["Kubernetes Administration"],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-12-05",
+      "certifications": ["AWS Solutions Architect", "Scrum Master"],
+      "skillsGaps": ["Kubernetes", "AI/ML"],
+      "recommendedTraining": ["Kubernetes Advanced", "Machine Learning for Engineers"],
+      "projectPerformance": [
+        {"project": "Platform Migration", "rating": 5, "completedDate": "2024-11-15"},
+        {"project": "Microservices Architecture", "rating": 5, "completedDate": "2024-10-20"}
+      ]
+    },
+    {
+      "employeeId": "EMP-003",
+      "name": "Lisa Wang",
+      "email": "lisa.wang@techcorp.com",
+      "title": "VP Sales",
+      "department": "Sales",
+      "reportsTo": "EMP-001",
+      "level": "L7",
+      "trainingCompleted": ["Security Awareness 2024", "Sales Leadership", "Negotiation Skills", "CRM Mastery"],
+      "trainingInProgress": ["Strategic Account Management"],
+      "trainingPending": ["Sales Analytics"],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-12-03",
+      "certifications": ["Certified Sales Professional", "Salesforce Admin"],
+      "skillsGaps": ["Data Analytics", "AI-powered Sales"],
+      "recommendedTraining": ["Sales Forecasting with AI", "Advanced Analytics"],
+      "projectPerformance": [
+        {"project": "Q4 Sales Campaign", "rating": 5, "completedDate": "2024-12-10"}
+      ]
+    },
+    {
+      "employeeId": "EMP-004",
+      "name": "Tom Brown",
+      "email": "tom.brown@techcorp.com",
+      "title": "VP Marketing",
+      "department": "Marketing",
+      "reportsTo": "EMP-001",
+      "level": "L7",
+      "trainingCompleted": ["Security Awareness 2024", "Digital Marketing", "Brand Management"],
+      "trainingInProgress": ["Growth Hacking", "SEO Advanced"],
+      "trainingPending": ["Marketing Analytics"],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-12-02",
+      "certifications": ["Google Analytics", "HubSpot Marketing"],
+      "skillsGaps": ["AI Marketing", "Programmatic Advertising"],
+      "recommendedTraining": ["AI in Marketing", "Programmatic Ads"],
+      "projectPerformance": [
+        {"project": "Brand Refresh", "rating": 4, "completedDate": "2024-11-20"}
+      ]
+    },
+    {
+      "employeeId": "EMP-005",
+      "name": "Sarah Director",
+      "email": "sarah.director@techcorp.com",
+      "title": "HR Director",
+      "department": "HR",
+      "reportsTo": "EMP-001",
+      "level": "L6",
+      "trainingCompleted": ["Security Awareness 2024", "HR Leadership", "Labor Law", "Talent Acquisition"],
+      "trainingInProgress": ["DEIB Training"],
+      "trainingPending": ["HR Analytics"],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-12-01",
+      "certifications": ["SHRM-SCP", "PHR"],
+      "skillsGaps": ["People Analytics", "HR Tech"],
+      "recommendedTraining": ["HR Analytics", "AI in Recruitment"],
+      "projectPerformance": [
+        {"project": "Talent Pipeline 2024", "rating": 5, "completedDate": "2024-11-30"}
+      ]
+    },
+    {
+      "employeeId": "EMP-006",
+      "name": "Robert Chen",
+      "email": "robert.chen@techcorp.com",
+      "title": "CFO",
+      "department": "Finance",
+      "reportsTo": "EMP-001",
+      "level": "L7",
+      "trainingCompleted": ["Security Awareness 2024", "Financial Leadership", "Strategic Finance", "Corporate Governance"],
+      "trainingInProgress": [],
+      "trainingPending": [],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-12-01",
+      "certifications": ["CPA", "CFA"],
+      "skillsGaps": [],
+      "recommendedTraining": ["FinTech Trends", "Blockchain for Finance"]
+    },
+    {
+      "employeeId": "EMP-007",
+      "name": "Amanda Wilson",
+      "email": "amanda.wilson@techcorp.com",
+      "title": "HR Manager",
+      "department": "HR",
+      "reportsTo": "EMP-005",
+      "level": "L5",
+      "trainingCompleted": ["Security Awareness 2024", "HR Management", "Performance Management"],
+      "trainingInProgress": ["Employee Relations"],
+      "trainingPending": ["HR Compliance 2025"],
+      "complianceStatus": "Due Soon",
+      "lastComplianceDate": "2024-06-15",
+      "certifications": ["PHR"],
+      "skillsGaps": ["HRIS", "Data Analysis"],
+      "recommendedTraining": ["HRIS Systems", "HR Analytics Basics"]
+    },
+    {
+      "employeeId": "EMP-008",
+      "name": "Jennifer Lee",
+      "email": "jennifer.lee@techcorp.com",
+      "title": "Senior Recruiter",
+      "department": "HR",
+      "reportsTo": "EMP-007",
+      "level": "L3",
+      "trainingCompleted": ["Security Awareness 2024", "Recruiting Fundamentals", "Interviewing Skills"],
+      "trainingInProgress": ["Boolean Search Mastery"],
+      "trainingPending": ["GDPR for Recruiters"],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-11-20",
+      "certifications": ["LinkedIn Recruiter Certified"],
+      "skillsGaps": ["AI Recruiting Tools", "Technical Recruiting"],
+      "recommendedTraining": ["AI-powered Recruiting", "Tech Stack for Recruiters"]
+    },
+    {
+      "employeeId": "EMP-009",
+      "name": "Mark Thompson",
+      "email": "mark.thompson@techcorp.com",
+      "title": "Recruiter",
+      "department": "HR",
+      "reportsTo": "EMP-008",
+      "level": "L2",
+      "trainingCompleted": ["Security Awareness 2024"],
+      "trainingInProgress": ["Recruiting Fundamentals", "Sourcing Strategies"],
+      "trainingPending": ["Interviewing Skills", "Offer Negotiation"],
+      "complianceStatus": "Non-Compliant",
+      "lastComplianceDate": "2024-02-10",
+      "certifications": [],
+      "skillsGaps": ["Boolean Search", "Technical Recruiting", "ATS Systems"],
+      "recommendedTraining": ["LinkedIn Recruiting", "Boolean Search", "Tech Recruiting 101"]
+    },
+    {
+      "employeeId": "EMP-010",
+      "name": "Emily Davis",
+      "email": "emily.davis@techcorp.com",
+      "title": "HR Operations Specialist",
+      "department": "HR",
+      "reportsTo": "EMP-007",
+      "level": "L3",
+      "trainingCompleted": ["Security Awareness 2024", "HR Operations", "Payroll Processing"],
+      "trainingInProgress": [],
+      "trainingPending": ["Benefits Administration"],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-11-25",
+      "certifications": ["Payroll Certified"],
+      "skillsGaps": ["HRIS Administration"],
+      "recommendedTraining": ["Workday HRIS", "Benefits Management"]
+    },
+    {
+      "employeeId": "EMP-016",
+      "name": "John Smith",
+      "email": "john.smith@techcorp.com",
+      "title": "Senior Software Engineer",
+      "department": "Engineering",
+      "reportsTo": "EMP-014",
+      "level": "L3",
+      "trainingCompleted": ["Security Awareness 2024", "Java Advanced", "Microservices Architecture", "Docker Fundamentals"],
+      "trainingInProgress": ["Kubernetes Administration", "AWS Solutions Architect"],
+      "trainingPending": ["System Design", "Leadership Skills"],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-11-28",
+      "certifications": ["Oracle Certified Java Programmer", "AWS Developer Associate"],
+      "skillsGaps": ["Kubernetes", "System Design", "Team Leadership"],
+      "recommendedTraining": ["Kubernetes Advanced", "System Design Masterclass", "Tech Lead Training"],
+      "projectPerformance": [
+        {"project": "Payment Gateway", "rating": 5, "completedDate": "2024-12-01"},
+        {"project": "API Gateway Migration", "rating": 4, "completedDate": "2024-10-15"}
+      ]
+    },
+    {
+      "employeeId": "EMP-017",
+      "name": "Maria Garcia",
+      "email": "maria.garcia@techcorp.com",
+      "title": "Senior Software Engineer",
+      "department": "Engineering",
+      "reportsTo": "EMP-014",
+      "level": "L3",
+      "trainingCompleted": ["Security Awareness 2024", "React Advanced", "Node.js Mastery", "GraphQL"],
+      "trainingInProgress": ["Next.js", "TypeScript Advanced"],
+      "trainingPending": ["System Design"],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-12-05",
+      "certifications": ["React Certified Developer"],
+      "skillsGaps": ["Backend Architecture", "Database Design"],
+      "recommendedTraining": ["Database Design", "Backend Architecture Patterns"],
+      "projectPerformance": [
+        {"project": "UI Redesign", "rating": 5, "completedDate": "2024-11-10"},
+        {"project": "Mobile App", "rating": 4, "completedDate": "2024-09-20"}
+      ]
+    },
+    {
+      "employeeId": "EMP-018",
+      "name": "James Wilson",
+      "email": "james.wilson@techcorp.com",
+      "title": "DevOps Engineer",
+      "department": "Engineering",
+      "reportsTo": "EMP-015",
+      "level": "L3",
+      "trainingCompleted": ["Security Awareness 2024", "Kubernetes Administration", "CI/CD Pipelines", "Terraform"],
+      "trainingInProgress": ["AWS Solutions Architect"],
+      "trainingPending": ["Security Operations"],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-11-30",
+      "certifications": ["Kubernetes Administrator", "AWS SysOps"],
+      "skillsGaps": ["Security Engineering", "Cost Optimization"],
+      "recommendedTraining": ["Cloud Security", "FinOps for Engineers"],
+      "projectPerformance": [
+        {"project": "Infrastructure Automation", "rating": 5, "completedDate": "2024-11-25"}
+      ]
+    },
+    {
+      "employeeId": "EMP-019",
+      "name": "Anna Taylor",
+      "email": "anna.taylor@techcorp.com",
+      "title": "Frontend Developer",
+      "department": "Engineering",
+      "reportsTo": "EMP-014",
+      "level": "L2",
+      "trainingCompleted": ["Security Awareness 2024", "React Basics", "JavaScript ES6"],
+      "trainingInProgress": ["React Advanced", "TypeScript"],
+      "trainingPending": ["CSS Advanced", "Web Performance"],
+      "complianceStatus": "Compliant",
+      "lastComplianceDate": "2024-11-15",
+      "certifications": [],
+      "skillsGaps": ["State Management", "Testing", "Performance Optimization"],
+      "recommendedTraining": ["Redux Mastery", "Jest & React Testing Library", "Web Performance"]
+    },
+    {
+      "employeeId": "EMP-020",
+      "name": "Ryan Park",
+      "email": "ryan.park@techcorp.com",
+      "title": "Backend Developer",
+      "department": "Engineering",
+      "reportsTo": "EMP-015",
+      "level": "L2",
+      "trainingCompleted": ["Security Awareness 2024", "Node.js Basics", "SQL Fundamentals"],
+      "trainingInProgress": ["Node.js Advanced", "PostgreSQL"],
+      "trainingPending": ["System Design", "API Design"],
+      "complianceStatus": "Non-Compliant",
+      "lastComplianceDate": "2024-03-20",
+      "certifications": [],
+      "skillsGaps": ["API Design", "Database Optimization", "Microservices"],
+      "recommendedTraining": ["RESTful API Design", "Database Performance Tuning", "Microservices Patterns"]
+    }
+  ],
+  "courses": [
+    {
+      "courseId": "COURSE-001",
+      "title": "Security Awareness 2024",
+      "category": "Compliance",
+      "tenantId": "techcorp",
+      "durationHours": 2,
+      "mandatory": true,
+      "validityMonths": 12,
+      "description": "Annual security awareness training covering phishing, data protection, and security best practices."
+    },
+    {
+      "courseId": "COURSE-002",
+      "title": "AWS Solutions Architect",
+      "category": "Technical",
+      "tenantId": "techcorp",
+      "durationHours": 40,
+      "mandatory": false,
+      "validityMonths": null,
+      "description": "Comprehensive AWS training for solutions architects."
+    },
+    {
+      "courseId": "COURSE-003",
+      "title": "Kubernetes Administration",
+      "category": "Technical",
+      "tenantId": "techcorp",
+      "durationHours": 32,
+      "mandatory": false,
+      "validityMonths": null,
+      "description": "Complete Kubernetes administration and orchestration."
+    },
+    {
+      "courseId": "COURSE-004",
+      "title": "React Advanced",
+      "category": "Technical",
+      "tenantId": "techcorp",
+      "durationHours": 24,
+      "mandatory": false,
+      "validityMonths": null,
+      "description": "Advanced React patterns, hooks, and performance optimization."
+    },
+    {
+      "courseId": "COURSE-005",
+      "title": "Leadership Excellence",
+      "category": "Leadership",
+      "tenantId": "techcorp",
+      "durationHours": 16,
+      "mandatory": true,
+      "validityMonths": 24,
+      "description": "Leadership skills for managers and executives."
+    },
+    {
+      "courseId": "COURSE-006",
+      "title": "GDPR Compliance",
+      "category": "Compliance",
+      "tenantId": "techcorp",
+      "durationHours": 4,
+      "mandatory": true,
+      "validityMonths": 12,
+      "description": "GDPR compliance training for all employees handling personal data."
+    },
+    {
+      "courseId": "COURSE-007",
+      "title": "System Design Masterclass",
+      "category": "Technical",
+      "tenantId": "techcorp",
+      "durationHours": 48,
+      "mandatory": false,
+      "validityMonths": null,
+      "description": "Design scalable distributed systems."
+    },
+    {
+      "courseId": "COURSE-008",
+      "title": "HR Analytics",
+      "category": "Business",
+      "tenantId": "techcorp",
+      "durationHours": 20,
+      "mandatory": false,
+      "validityMonths": null,
+      "description": "Data-driven HR decision making."
+    },
+    {
+      "courseId": "COURSE-009",
+      "title": "Sales Forecasting with AI",
+      "category": "Business",
+      "tenantId": "techcorp",
+      "durationHours": 12,
+      "mandatory": false,
+      "validityMonths": null,
+      "description": "AI-powered sales forecasting and analytics."
+    },
+    {
+      "courseId": "COURSE-010",
+      "title": "Docker Fundamentals",
+      "category": "Technical",
+      "tenantId": "techcorp",
+      "durationHours": 16,
+      "mandatory": false,
+      "validityMonths": null,
+      "description": "Containerization with Docker."
+    }
+  ],
+  "complianceSummary": {
+    "compliant": 15,
+    "dueThisMonth": 3,
+    "overdue": 2,
+    "total": 20
+  },
+  "skillsMatrix": {
+    "Engineering": {
+      "criticalSkills": ["Kubernetes", "System Design", "Cloud Security"],
+      "emergingSkills": ["AI/ML", "Edge Computing", "WebAssembly"],
+      "averageGapPercentage": 35
+    },
+    "Sales": {
+      "criticalSkills": ["AI-powered Sales", "Data Analytics", "Account Management"],
+      "emergingSkills": ["Social Selling", "Video Marketing"],
+      "averageGapPercentage": 28
+    },
+    "Marketing": {
+      "criticalSkills": ["AI Marketing", "Growth Hacking", "Marketing Analytics"],
+      "emergingSkills": ["Influencer Marketing", "Web3 Marketing"],
+      "averageGapPercentage": 32
+    },
+    "HR": {
+      "criticalSkills": ["People Analytics", "HRIS", "DEIB"],
+      "emergingSkills": ["AI Recruiting", "Remote Work Management"],
+      "averageGapPercentage": 40
+    }
+  }
+}
+

@@ -49,7 +49,7 @@ export default function Dashboard() {
   };
 
   const statCards: StatCard[] = [
-    { label: 'Courses In Progress', value: 4, change: '+2 this week', icon: BookOpen, color: 'from-cyan-400/80 via-cyan-500/70 to-blue-500/60' },
+    { label: 'Courses In Progress', value: 4, change: '+2 this week', icon: BookOpen, color: 'from-purple-500 to-pink-500' },
     { label: 'Learning Hours', value: '28.5', change: '+5.2 hrs', icon: Clock, color: 'from-purple-400/80 via-purple-500/70 to-pink-500/60' },
     { label: 'Certifications', value: 3, change: '1 expiring soon', icon: Award, color: 'from-amber-400/80 via-amber-500/70 to-orange-500/60' },
     { label: 'Skill Score', value: '85%', change: '+12% growth', icon: TrendingUp, color: 'from-emerald-400/80 via-emerald-500/70 to-teal-500/60' },
@@ -61,9 +61,9 @@ export default function Dashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-white mb-2">
-            Welcome back, <span className="text-cyan-400">Rajesh</span> 👋
+            Welcome back, <span className="text-purple-400">{sessionStorage.getItem('userEmail')?.split('@')[0].replace('.', ' ').split(' ').map(n => n.charAt(0).toUpperCase() + n.slice(1)).join(' ') || 'User'}</span> 👋
           </h1>
-          <p className="text-gray-400">Continue your learning journey. You're doing great!</p>
+          <p className="text-gray-400">Continue your learning journey with TechCorp. You're doing great!</p>
         </div>
         <div className="flex gap-3">
           <button className="theme-button-secondary flex items-center gap-2 px-5 py-2.5">
@@ -105,7 +105,7 @@ export default function Dashboard() {
         <div className="col-span-2 theme-card">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold text-white">Continue Learning</h2>
-            <button className="text-cyan-400 hover:text-cyan-300 text-sm font-medium flex items-center gap-1">
+            <button className="text-purple-400 hover:text-purple-300 text-sm font-medium flex items-center gap-1">
               View All <ChevronRight className="w-4 h-4" />
             </button>
           </div>
@@ -113,11 +113,11 @@ export default function Dashboard() {
           <div className="space-y-4">
             {courses.length > 0 ? courses.map((course: any, i: number) => (
               <div key={i} className="flex items-center gap-4 p-4 bg-gray-700/30 hover:bg-gray-700/50 rounded-xl transition-all cursor-pointer group border border-gray-700/50">
-                <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-cyan-500/20 to-purple-500/20 flex items-center justify-center shrink-0 border border-gray-600/50">
-                  <BookOpen className="w-8 h-8 text-cyan-400" />
+                <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center shrink-0 border border-gray-600/50">
+                  <BookOpen className="w-8 h-8 text-purple-400" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-white truncate group-hover:text-cyan-400 transition-colors">
+                  <h3 className="font-semibold text-white truncate group-hover:text-purple-400 transition-colors">
                     {course.title}
                   </h3>
                   <p className="text-sm text-gray-400">{course.instructor} • {course.durationHours} hours</p>
@@ -128,8 +128,8 @@ export default function Dashboard() {
                     <span className="text-xs text-gray-400">{Math.floor(Math.random() * 60 + 20)}%</span>
                   </div>
                 </div>
-                <button className="shrink-0 w-10 h-10 rounded-full bg-cyan-500/20 hover:bg-cyan-500 flex items-center justify-center transition-all border border-cyan-500/30">
-                  <Play className="w-5 h-5 text-cyan-400 group-hover:text-white" />
+                <button className="shrink-0 w-10 h-10 rounded-full bg-purple-500/20 hover:bg-purple-500 flex items-center justify-center transition-all border border-purple-500/30">
+                  <Play className="w-5 h-5 text-purple-400 group-hover:text-white" />
                 </button>
               </div>
             )) : (
@@ -174,7 +174,7 @@ export default function Dashboard() {
       <div className="theme-card">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-white">Recommended For You</h2>
-          <button className="text-cyan-400 hover:text-cyan-300 text-sm font-medium flex items-center gap-1">
+          <button className="text-purple-400 hover:text-purple-300 text-sm font-medium flex items-center gap-1">
             Browse All <ChevronRight className="w-4 h-4" />
           </button>
         </div>
@@ -183,10 +183,10 @@ export default function Dashboard() {
           {(courses.length > 0 ? courses : [1,2,3,4]).map((course: any, i: number) => (
             <div key={i} className="bg-gray-700/30 rounded-xl overflow-hidden card-hover cursor-pointer group border border-gray-700/50">
               <div className="h-32 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
-                <BookOpen className="w-12 h-12 text-cyan-400/50" />
+                <BookOpen className="w-12 h-12 text-purple-400/50" />
               </div>
               <div className="p-4">
-                <h3 className="font-semibold text-white text-sm mb-1 line-clamp-2 group-hover:text-cyan-400 transition-colors">
+                <h3 className="font-semibold text-white text-sm mb-1 line-clamp-2 group-hover:text-purple-400 transition-colors">
                   {course.title || 'Course Title'}
                 </h3>
                 <p className="text-xs text-gray-400 mb-2">{course.instructor || 'Instructor'}</p>
