@@ -8,9 +8,10 @@ import {
   Target,
   Play,
   ChevronRight,
-  Star
+  Star,
+  AlertCircle
 } from 'lucide-react';
-import { api } from '../services/api';
+import { LearningAPIService } from '../services/LearningAPIService';
 
 interface StatCard {
   label: string;
@@ -24,7 +25,10 @@ export default function Dashboard() {
   const [stats, setStats] = useState<any>(null);
   const [courses, setCourses] = useState<any[]>([]);
   const [assignments, setAssignments] = useState<any[]>([]);
+  const [enrollments, setEnrollments] = useState<any[]>([]);
+  const [certifications, setCertifications] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     loadData();
@@ -32,28 +36,77 @@ export default function Dashboard() {
 
   const loadData = async () => {
     try {
-      const [courseRes, assignmentRes, certRes] = await Promise.all([
-        api.getCourses().catch(() => ({ data: [] })),
-        api.getAssignments('emp-001').catch(() => ({ data: [] })),
-        api.getCertificationStats().catch(() => ({ data: {} }))
+      setLoading(true);
+      setError(null);
+      
+      // Initialize tenant context
+      LearningAPIService.initializeTenantContext();
+      const tenantContext = LearningAPIService.getTenantContext();
+      
+      // Fetch data from backend services
+      const [coursesData, enrollmentsData, assignmentsData, certificationsData] = await Promise.all([
+        LearningAPIService.getCourses().catch(() => []),
+        LearningAPIService.getEnrollments(tenantContext.userId).catch(() => []),
+        LearningAPIService.getAssignments(tenantContext.userId).catch(() => []),
+        LearningAPIService.getCertifications(tenantContext.userId).catch(() => [])
       ]);
       
-      setCourses(courseRes.data?.slice(0, 4) || []);
-      setAssignments(assignmentRes.data?.slice(0, 3) || []);
-      setStats(certRes.data || {});
-    } catch (error) {
+      setCourses(Array.isArray(coursesData) ? coursesData.slice(0, 4) : []);
+      setEnrollments(Array.isArray(enrollmentsData) ? enrollmentsData : []);
+      setAssignments(Array.isArray(assignmentsData) ? assignmentsData.slice(0, 3) : []);
+      setCertifications(Array.isArray(certificationsData) ? certificationsData : []);
+      
+      // Calculate stats from real data
+      const inProgressCount = enrollmentsData.filter((e: any) => e.status === 'IN_PROGRESS').length || 0;
+      const totalHours = enrollmentsData.reduce((sum: number, e: any) => sum + (e.hoursCompleted || 0), 0);
+      const certCount = certificationsData.length || 0;
+      
+      setStats({
+        inProgress: inProgressCount,
+        hours: totalHours,
+        certifications: certCount
+      });
+    } catch (error: any) {
       console.error('Error loading dashboard:', error);
+      setError(error.message || 'Failed to load dashboard data');
     } finally {
       setLoading(false);
     }
   };
 
   const statCards: StatCard[] = [
-    { label: 'Courses In Progress', value: 4, change: '+2 this week', icon: BookOpen, color: 'from-purple-500 to-pink-500' },
-    { label: 'Learning Hours', value: '28.5', change: '+5.2 hrs', icon: Clock, color: 'from-purple-400/80 via-purple-500/70 to-pink-500/60' },
-    { label: 'Certifications', value: 3, change: '1 expiring soon', icon: Award, color: 'from-amber-400/80 via-amber-500/70 to-orange-500/60' },
-    { label: 'Skill Score', value: '85%', change: '+12% growth', icon: TrendingUp, color: 'from-emerald-400/80 via-emerald-500/70 to-teal-500/60' },
+    { label: 'Courses In Progress', value: stats?.inProgress || 0, change: `${enrollments.length} total`, icon: BookOpen, color: 'from-purple-500 to-pink-500' },
+    { label: 'Learning Hours', value: stats?.hours?.toFixed(1) || '0', change: 'Total hours', icon: Clock, color: 'from-purple-400/80 via-purple-500/70 to-pink-500/60' },
+    { label: 'Certifications', value: stats?.certifications || 0, change: 'Earned', icon: Award, color: 'from-amber-400/80 via-amber-500/70 to-orange-500/60' },
+    { label: 'Skill Score', value: `${Math.min(100, (stats?.hours || 0) * 2)}%`, change: 'Progress', icon: TrendingUp, color: 'from-emerald-400/80 via-emerald-500/70 to-teal-500/60' },
   ];
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-500 mx-auto mb-4"></div>
+          <p className="text-gray-400">Loading dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="theme-card p-8 text-center">
+        <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+        <h2 className="text-xl font-bold text-white mb-2">Failed to Load Dashboard</h2>
+        <p className="text-gray-400 mb-4">{error}</p>
+        <button 
+          onClick={loadData}
+          className="theme-button-primary px-6 py-2"
+        >
+          Try Again
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8 animate-fade-in-up">
@@ -111,31 +164,36 @@ export default function Dashboard() {
           </div>
           
           <div className="space-y-4">
-            {courses.length > 0 ? courses.map((course: any, i: number) => (
-              <div key={i} className="flex items-center gap-4 p-4 bg-gray-700/30 hover:bg-gray-700/50 rounded-xl transition-all cursor-pointer group border border-gray-700/50">
-                <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center shrink-0 border border-gray-600/50">
-                  <BookOpen className="w-8 h-8 text-purple-400" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-white truncate group-hover:text-purple-400 transition-colors">
-                    {course.title}
-                  </h3>
-                  <p className="text-sm text-gray-400">{course.instructor} • {course.durationHours} hours</p>
-                  <div className="mt-2 flex items-center gap-3">
-                    <div className="flex-1 h-1.5 bg-gray-700 rounded-full overflow-hidden">
-                      <div className="progress-bar h-full rounded-full" style={{ width: `${Math.random() * 60 + 20}%` }}></div>
-                    </div>
-                    <span className="text-xs text-gray-400">{Math.floor(Math.random() * 60 + 20)}%</span>
+            {enrollments.length > 0 ? enrollments.slice(0, 4).map((enrollment: any, i: number) => {
+              const course = courses.find((c: any) => c.id === enrollment.courseId) || {};
+              const progress = enrollment.progress || 0;
+              
+              return (
+                <div key={i} className="flex items-center gap-4 p-4 bg-gray-700/30 hover:bg-gray-700/50 rounded-xl transition-all cursor-pointer group border border-gray-700/50">
+                  <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center shrink-0 border border-gray-600/50">
+                    <BookOpen className="w-8 h-8 text-purple-400" />
                   </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-white truncate group-hover:text-purple-400 transition-colors">
+                      {course.title || enrollment.courseTitle || 'Course Title'}
+                    </h3>
+                    <p className="text-sm text-gray-400">{course.instructor || 'Instructor'} • {course.durationHours || enrollment.durationHours || 'N/A'} hours</p>
+                    <div className="mt-2 flex items-center gap-3">
+                      <div className="flex-1 h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div className="progress-bar h-full rounded-full" style={{ width: `${progress}%` }}></div>
+                      </div>
+                      <span className="text-xs text-gray-400">{progress}%</span>
+                    </div>
+                  </div>
+                  <button className="shrink-0 w-10 h-10 rounded-full bg-purple-500/20 hover:bg-purple-500 flex items-center justify-center transition-all border border-purple-500/30">
+                    <Play className="w-5 h-5 text-purple-400 group-hover:text-white" />
+                  </button>
                 </div>
-                <button className="shrink-0 w-10 h-10 rounded-full bg-purple-500/20 hover:bg-purple-500 flex items-center justify-center transition-all border border-purple-500/30">
-                  <Play className="w-5 h-5 text-purple-400 group-hover:text-white" />
-                </button>
-              </div>
-            )) : (
+              );
+            }) : (
               <div className="text-center py-8 text-gray-400">
                 <BookOpen className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                <p>Start the services to see courses</p>
+                <p>No courses in progress. Browse catalog to get started!</p>
               </div>
             )}
           </div>
@@ -149,21 +207,25 @@ export default function Dashboard() {
           </div>
           
           <div className="space-y-4">
-            {assignments.length > 0 ? assignments.map((assignment: any, i: number) => (
-              <div key={i} className="p-4 bg-gray-700/30 rounded-xl border-l-4 border-amber-500">
-                <h3 className="font-medium text-white text-sm mb-1">{assignment.courseTitle}</h3>
-                <p className="text-xs text-gray-400 mb-2">Due: {new Date(assignment.dueDate).toLocaleDateString()}</p>
-                <div className="flex items-center justify-between">
-                  <span className={`badge ${assignment.priority === 'CRITICAL' ? 'badge-danger' : assignment.priority === 'HIGH' ? 'badge-warning' : 'badge-info'}`}>
-                    {assignment.priority}
-                  </span>
-                  <span className="text-xs text-gray-400">{assignment.progress}% complete</span>
+            {assignments.length > 0 ? assignments.map((assignment: any, i: number) => {
+              const course = courses.find((c: any) => c.id === assignment.courseId) || {};
+              
+              return (
+                <div key={i} className="p-4 bg-gray-700/30 rounded-xl border-l-4 border-amber-500">
+                  <h3 className="font-medium text-white text-sm mb-1">{course.title || assignment.courseTitle || 'Course Title'}</h3>
+                  <p className="text-xs text-gray-400 mb-2">Due: {new Date(assignment.dueDate).toLocaleDateString()}</p>
+                  <div className="flex items-center justify-between">
+                    <span className={`badge ${assignment.priority === 'CRITICAL' ? 'badge-danger' : assignment.priority === 'HIGH' ? 'badge-warning' : 'badge-info'}`}>
+                      {assignment.priority || 'MEDIUM'}
+                    </span>
+                    <span className="text-xs text-gray-400">{assignment.status || 'PENDING'}</span>
+                  </div>
                 </div>
-              </div>
-            )) : (
+              );
+            }) : (
               <div className="text-center py-8 text-gray-400">
                 <Target className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                <p>No assignments</p>
+                <p>No assignments yet</p>
               </div>
             )}
           </div>
@@ -180,14 +242,14 @@ export default function Dashboard() {
         </div>
         
         <div className="grid grid-cols-4 gap-4">
-          {(courses.length > 0 ? courses : [1,2,3,4]).map((course: any, i: number) => (
+          {courses.length > 0 ? courses.map((course: any, i: number) => (
             <div key={i} className="bg-gray-700/30 rounded-xl overflow-hidden card-hover cursor-pointer group border border-gray-700/50">
               <div className="h-32 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
                 <BookOpen className="w-12 h-12 text-purple-400/50" />
               </div>
               <div className="p-4">
                 <h3 className="font-semibold text-white text-sm mb-1 line-clamp-2 group-hover:text-purple-400 transition-colors">
-                  {course.title || 'Course Title'}
+                  {course.title}
                 </h3>
                 <p className="text-xs text-gray-400 mb-2">{course.instructor || 'Instructor'}</p>
                 <div className="flex items-center justify-between">
@@ -195,13 +257,19 @@ export default function Dashboard() {
                     <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
                     <span className="text-xs text-gray-300">{course.rating || '4.5'}</span>
                   </div>
-                  <span className="text-xs text-gray-400">{course.durationHours || '8'} hrs</span>
+                  <span className="text-xs text-gray-400">{course.durationHours || 'N/A'} hrs</span>
                 </div>
               </div>
             </div>
-          ))}
+          )) : (
+            <div className="col-span-4 text-center py-8 text-gray-400">
+              <BookOpen className="w-12 h-12 mx-auto mb-3 opacity-50" />
+              <p>No courses available</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
+
